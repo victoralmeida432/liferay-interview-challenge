@@ -2,11 +2,8 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    tags:
+      - "v*.*.*" # Aciona o pipeline para tags de versão como v1.0.0, v2.1.0, etc.
 
 jobs:
   test:
@@ -19,3 +16,24 @@ jobs:
           node-version: "14"
       - run: yarn install
       - run: yarn test
+
+  # O bloco abaixo seria utilizado para deployment no Kubernetes em um provedor de cloud
+  # mas como não estamos utilizando nenhum provedor de cloud atualmente, ele está comentado.
+  #
+  # deploy:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Set up Helm
+  #       uses: azure/setup-helm@v1
+  #
+  #     # Abaixo seria utilizado para autenticação no Kubernetes com KUBECONFIG,
+  #     # porém, essa configuração depende de um provedor cloud que não está sendo utilizado.
+  #     # - name: Set up KUBECONFIG
+  #     #   run: echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+  #
+  #     - name: Helm Upgrade
+  #       run: helm upgrade --install liferay-interview-challenge ./liferay-interview-challenge-chart \
+  #             --namespace default --values ./liferay-interview-challenge-chart/values.yaml \
+  #             --values ./liferay-interview-challenge-chart/values-${{ github.ref }}.yaml

@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  repository: victoralmeida92/liferay-challenge
+  pullPolicy: IfNotPresent
+  tag: "v1.0"
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources: {}
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
