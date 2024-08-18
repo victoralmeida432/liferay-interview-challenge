@@ -1,12 +1,10 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
 export class Category {
+  @PrimaryGeneratedColumn()
+  id: number = 0; // Inicializar com valor padrão
 
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    name: string;
-
+  @Column()
+  name: string = ""; // Inicializar com valor padrão
 }
