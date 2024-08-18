@@ -73,41 +73,25 @@ Ensure you have the following software installed:
 
 ## Running Tests
 
-Currently, the project does not include automated tests, but you can add tests using Jest or a similar testing framework. Here’s how you might go about setting up testing:
+To run tests for this project, follow these steps:
 
-### 1. Install Jest:
+1. **Set the environment variable for testing:**
 
-```bash
-yarn add --dev jest ts-jest @types/jest
-```
+    Set the `NODE_ENV` environment variable to `test` to ensure the application uses the test database configuration.
 
-### 2. Configure Jest:
+    ```bash
+    export NODE_ENV=test
+    ```
 
-Create a `jest.config.js` file in the root directory:
+2. **Run the tests:**
 
-```javascript
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
-};
-```
+    Use Yarn to execute the tests.
 
-### 3. Add a Test Script:
+    ```bash
+    yarn test
+    ```
 
-Update `package.json` to include a test script:
-
-```json
-"scripts": {
-  "test": "jest"
-}
-```
-
-### 4. Run Tests:
-
-```bash
-yarn test
-```
+This will run all the test suites and output the results. Make sure that your application is correctly configured for the test environment to avoid connection issues.
 
 ## Architecture Overview
 
