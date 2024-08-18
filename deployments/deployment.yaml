@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: app-container
-          image: victoralmeida92/liferay-challenge:v1.0
+          image: victoralmeida92/liferay-challenge:v1.1
           ports:
             - containerPort: 3000
