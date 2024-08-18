@@ -17,6 +17,21 @@ jobs:
       - run: yarn install
       - run: yarn test
 
+  trivy-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Trivy
+        run: |
+          sudo apt-get install wget apt-transport-https gnupg lsb-release -y
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo tee /etc/apt/trusted.gpg.d/trivy.asc
+          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update
+          sudo apt-get install trivy
+      - name: Scan Docker Image for Vulnerabilities
+        env:
+          DOCKER_IMAGE: victoralmeida92/liferay-challenge:v1.1
+        run: trivy image $DOCKER_IMAGE
+
   # O bloco abaixo seria utilizado para deployment no Kubernetes em um provedor de cloud
   # mas como não estamos utilizando nenhum provedor de cloud atualmente, ele está comentado.
   #
