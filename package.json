@@ -44,7 +44,7 @@
     "typeorm": "^0.3.20"
   },
   "scripts": {
-    "start": "tsc && node src/index.js",
+    "start": "tsc && node dist/index.js",
     "build": "tsc",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "test": "NODE_ENV=test jest"

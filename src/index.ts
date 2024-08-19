@@ -33,13 +33,15 @@ const dataSource =
 dataSource
   .initialize()
   .then(() => {
+    const postRepository = dataSource.getRepository(Post);
+
     AppRoutes.forEach((route) => {
       const method = route.method as keyof Express;
       (app[method] as Function)(
         route.path,
         async (request: Request, response: Response, next: NextFunction) => {
           try {
-            await route.action(request, response);
+            await route.action(request, response, postRepository);
             next();
           } catch (err) {
             console.error("Error during request processing:", err);

@@ -17,3 +17,16 @@ spec:
           image: victoralmeida92/liferay-challenge:v1.1
           ports:
             - containerPort: 3000
+          env:
+            - name: TYPEORM_CONNECTION
+              value: "mysql"
+            - name: TYPEORM_HOST
+              value: "db"
+            - name: TYPEORM_PORT
+              value: "3306"
+            - name: TYPEORM_USERNAME
+              value: "test"
+            - name: TYPEORM_PASSWORD
+              value: "test"
+            - name: TYPEORM_DATABASE
+              value: "test"
