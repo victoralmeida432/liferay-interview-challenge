@@ -24,6 +24,8 @@
     "typeorm-express-example"
   ],
   "devDependencies": {
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-typescript": "^7.24.7",
     "@types/body-parser": "^1.16.8",
     "@types/express": "^4.11.1",
     "@types/jest": "^29.5.12",
