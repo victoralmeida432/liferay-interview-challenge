@@ -133,6 +133,14 @@ liferay-interview-challenge/
 3. **Controller Logic:** Controllers handle the request, interact with the database through entities, and return the response.
 4. **Database Interaction:** TypeORM is used to interact with the MariaDB database.
 
+### Port-Forwarding & Deployment setup (Why Port-Forwarding for this challenge)
+
+Since we are running our Kubernetes cluster locally with Minikube and not using a cloud provider with LoadBalancer support, we've implemented port-forwarding for testing purposes. This allows us to access the application externally via a specific port on the local machine.
+
+Port-forwarding is typically not used in production environments. In a production setup, we would configure a LoadBalancer service to route traffic appropriately, leveraging cloud provider capabilities for scaling and resilience.
+
+However, for local development and testing, port-forwarding is a practical solution that allows us to simulate external access to our services.
+
 ## Deployment
 
 ### Prerequisites
