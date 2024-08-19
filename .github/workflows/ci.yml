@@ -10,12 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "16"
       - run: yarn install
-      - run: yarn test
+      - run: node -v
+      - run: yarn jest --version
+      - run: yarn test --verbose
 
   build:
     runs-on: ubuntu-latest
