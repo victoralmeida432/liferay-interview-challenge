@@ -53,3 +53,25 @@ helm-rollback:
 helm-uninstall:
 	@echo "Uninstalling with Helm..."
 	helm uninstall liferay-interview-challenge
+
+.PHONY: deploy-monitoring
+deploy-monitoring:
+	@echo "Deploying Prometheus and Grafana..."
+	kubectl apply -f monitoring/prometheus/
+	kubectl apply -f monitoring/grafana/
+
+.PHONY: start-all
+start-all: build push deploy deploy-monitoring show-urls
+
+.PHONY: show-urls
+show-urls:
+	@sleep 5 # Aguarde alguns segundos para garantir que os serviços estejam prontos
+	@echo "Fetching the Minikube IP and NodePorts..."
+	MINIKUBE_IP=$(shell minikube ip)
+	APP_PORT=$(shell kubectl get svc/app-service -o jsonpath='{.spec.ports[0].nodePort}')
+	GRAFANA_PORT=$(shell kubectl get svc/grafana-service -o jsonpath='{.spec.ports[0].nodePort}')
+	PROMETHEUS_PORT=$(shell kubectl get svc/prometheus-service -o jsonpath='{.spec.ports[0].nodePort}')
+	@echo "Application is running at: http://$(MINIKUBE_IP):$(APP_PORT)"
+	@echo "Grafana is running at: http://$(MINIKUBE_IP):$(GRAFANA_PORT)"
+	@echo "Prometheus is running at: http://$(MINIKUBE_IP):$(PROMETHEUS_PORT)"
+	@echo "Note: Please run 'minikube tunnel' in a separate terminal to expose the services if they are not accessible."
