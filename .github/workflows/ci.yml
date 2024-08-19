@@ -17,6 +17,21 @@ jobs:
       - run: yarn install
       - run: yarn test
 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and Push Docker Image
+        run: |
+          docker buildx build --push --tag victoralmeida92/liferay-challenge:v1.1 .
+
   trivy-scan:
     runs-on: ubuntu-latest
     steps:

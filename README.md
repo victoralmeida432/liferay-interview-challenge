@@ -30,7 +30,7 @@ cd liferay-interview-challenge
 
 Ensure you have the following software installed:
 
-- **Node.js** (v14.x or later)
+- **Node.js** (v16.x or later)
 - **Yarn** (v1.22.x or later)
 - **Docker** (v20.x or later)
 - **Docker Compose** (v1.29.x or later)
@@ -460,3 +460,28 @@ Below is a list of the `make` commands available in this project, along with a d
     ```bash
     make show-urls
     ```
+
+    ## Continuous Integration
+
+    This project uses GitHub Actions for Continuous Integration (CI). The CI pipeline is triggered automatically on every push to the repository or when a new tag is created following the `v*.*.*` pattern.
+
+    ### Viewing CI Results
+
+    To view the results of the CI pipeline:
+
+    1. Navigate to the **Actions** tab in the GitHub repository.
+    2. Look for the workflow run associated with your latest commit or tag.
+    3. You should see the jobs for testing, building, and scanning the Docker image. Ensure that all jobs have passed successfully.
+
+    ### Triggering a CI Pipeline with a Tag
+
+    If you want to manually trigger the CI pipeline with a specific version:
+
+    1. Make sure all your changes are committed and pushed to the repository.
+    2. Create a new version tag using the following commands:
+
+       ```bash
+       git tag v1.1.0
+       git push origin v1.1.0
+       ```
+    3. Check the Actions tab to monitor the CI process and confirm that it runs without errors.
